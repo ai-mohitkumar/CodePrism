@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://codeprism-sch8.onrender.com/api/$1"
+    },
+    {
+      "source": "/health",
+      "destination": "https://codeprism-sch8.onrender.com/health"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
