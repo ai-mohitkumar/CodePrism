@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    
+    <!-- PWA Primary Meta Tags -->
+    <title>CodePrism 🔮 — Universal Intelligent Compiler</title>
+    <meta name="title" content="CodePrism 🔮 — Universal Intelligent Compiler & Code Analysis Platform" />
+    <meta name="description" content="Universal multi-language compiler, step debugger, Big-O complexity analyzer, and cloud intelligence platform for Web, PC, Android, and iOS." />
+    
+    <!-- Theme & Color -->
+    <meta name="theme-color" content="#0B1020" />
+    <meta name="msapplication-TileColor" content="#0B1020" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Apple iOS Safari Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CodePrism" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Immediate PWA & Prompt Setup -->
+    <script>
+      window.deferredPWAInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        window.deferredPWAInstallPrompt = e;
+        window.dispatchEvent(new CustomEvent('pwa-prompt-ready', { detail: e }));
+        console.log('[CodePrism] Native PWA installation prompt captured and ready!');
+      });
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('[CodePrism] SW registered:', reg.scope);
+        }).catch(function(err) {
+          console.warn('[CodePrism] SW registration error:', err);
+        });
+      }
+    </script>
+  </head>
+  <body class="bg-[#080B12] text-gray-100 antialiased overflow-hidden select-none">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
