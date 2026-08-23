@@ -41,10 +41,9 @@ COPY tests/ ./tests/
 # Copy built frontend from Stage 1
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Expose port
-EXPOSE 8080
+# Expose port (Render automatically assigns PORT)
+EXPOSE 8080 10000
 
-ENV PORT=8080
 ENV HOST=0.0.0.0
 ENV PYTHONUNBUFFERED=1
 
@@ -52,7 +51,7 @@ WORKDIR /app/backend
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8080/health || exit 1
+  CMD curl -f http://localhost:${PORT:-8080}/health || exit 1
 
-# Start production server
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Start production server with dynamic port support (Render, Railway, GCP, Docker)
+CMD ["sh", "-c", "python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]

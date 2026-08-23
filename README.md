@@ -19,7 +19,18 @@
 
 ## 🚀 1-Click Production Deployment
 
-### Option 1: Docker (Single Self-Contained Container)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ai-mohitkumar/CodePrism)
+
+### Option 1: Render (1-Click Cloud Deployment)
+1. Go to [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** $\to$ **Blueprint** (or **Web Service**).
+3. Connect repository **`ai-mohitkumar/CodePrism`**.
+4. Render will automatically detect `render.yaml` and `Dockerfile`, build the React frontend and Python/GCC/JDK compiler engine, and deploy on free tier!
+5. Your live app is immediately accessible at `https://codeprism.onrender.com`!
+
+---
+
+### Option 2: Docker (Single Self-Contained Container)
 ```bash
 # Build and run the entire CodePrism platform
 docker build -t codeprism .
@@ -29,16 +40,15 @@ Visit **`http://localhost:8080`** — includes both the compiled Web IDE, PWA se
 
 ---
 
-### Option 2: Docker Compose
+### Option 3: Docker Compose
 ```bash
 docker compose up -d --build
 ```
 
 ---
 
-### Option 3: Cloud Platforms (Render, Railway, Fly.io, AWS, GCP)
-- **Render**: Connect repository $\to$ Uses `render.yaml` automatically.
-- **Railway / Fly.io / GCP Cloud Run**: Point to `Dockerfile` $\to$ Automatic multi-stage container deployment with healthcheck at `/health`.
+### Option 4: Other Cloud Platforms (Railway, Fly.io, GCP Cloud Run, AWS ECS)
+Point to `Dockerfile` $\to$ Set port to `${PORT}` $\to$ Automatic multi-stage container deployment with healthcheck at `/health`.
 
 ---
 
