@@ -2,6 +2,8 @@
 ### Universal Multi-Language Compiler & Intelligent Code Platform
 #### One Shared Compiler Engine • Desktop Web IDE • Installable PWA (Android, iOS, Windows, Mac) • Local RAM Session & Device Storage • Real-Time Cloud Sync • Production Ready
 
+[![Live Web App](https://img.shields.io/badge/Live_App-Vercel_Production-000000?logo=vercel&logoColor=white)](https://codeprism-gamma.vercel.app/)
+[![Live Backend](https://img.shields.io/badge/Live_Backend-Render_Cloud-46E3B7?logo=render&logoColor=black)](https://codeprism-sch8.onrender.com/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Installable_on_Android_%2B_iOS_%2B_PC-10B981?logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
@@ -9,9 +11,12 @@
 [![Monaco Editor](https://img.shields.io/badge/Editor-Monaco_IDE-1E1E1E?logo=visualstudiocode&logoColor=white)](https://microsoft.github.io/monaco-editor/)
 [![GCC](https://img.shields.io/badge/Compiler-GCC_C%2B%2B-00599C?logo=c%2B%2B&logoColor=white)](https://gcc.gnu.org)
 [![Java](https://img.shields.io/badge/JVM-Java_25-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org)
-[![.NET](https://img.shields.io/badge/.NET-SDK_9-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com)
 
 > **Code once. Compile anywhere. Understand everything.**
+
+- 🌐 **Live Web IDE & PWA**: [https://codeprism-gamma.vercel.app](https://codeprism-gamma.vercel.app)
+- ⚡ **Live Compiler Backend API**: [https://codeprism-sch8.onrender.com](https://codeprism-sch8.onrender.com)
+- 🐙 **GitHub Repository**: [https://github.com/ai-mohitkumar/CodePrism](https://github.com/ai-mohitkumar/CodePrism)
 
 **CodePrism** is a universal multi-language compiler, execution, and code intelligence platform packaged as an **Installable Progressive Web App (PWA)**, **Dual Save Subsystem (RAM Session + Native Device Storage Download)**, **Cloud Versioning Snapshots**, and a **Self-Contained Containerized Production Architecture**.
 
