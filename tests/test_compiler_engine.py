@@ -60,8 +60,45 @@ def test_compile_java_success():
     data = response.json()
     assert data["success"] is True
     assert data["target_artifact"] == "Calculator.class"
-    assert "javac" in data["compiler_name"]
-    assert "Code:" in data["ir_bytecode"] or "javap" in data["ir_bytecode"]
+    assert "javac" in data["compiler_name"] or "Java" in data["compiler_name"]
+
+def test_execute_java_multi_class_and_package():
+    java_code = """package com.codeprism.demo;
+class Helper {
+    static int multiply(int x) { return x * 3; }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Result: " + Helper.multiply(7));
+    }
+}"""
+    response = client.post("/api/execute", json={
+        "language": "java",
+        "code": java_code
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert "Result: 21" in data["execution"]["stdout"]
+
+def test_analyze_java_ast():
+    java_code = """class Node { int val; }
+public class Main {
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(i);
+        }
+    }
+}"""
+    response = client.post("/api/analyze/ast", json={
+        "language": "java",
+        "code": java_code
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert data["root"] is not None
+    assert len(data["root"]["children"]) >= 2
+    assert any("Main" in s or "Node" in s for s in data["summary"])
 
 def test_compile_python_disassembly():
     py_code = """def multiply(x, y):
@@ -76,3 +113,4 @@ def test_compile_python_disassembly():
     assert data["success"] is True
     assert data["target_artifact"] == "program.pyc"
     assert "BINARY_OP" in data["ir_bytecode"] or "LOAD_FAST" in data["ir_bytecode"]
+

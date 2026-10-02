@@ -151,6 +151,33 @@ int main() {
         System.out.println("Maximum element: " + findMax(numbers));
     }
 }
+''',
+                "nested_loops": '''public class Main {
+    public static int countPairs(int[] data) {
+        int count = 0;
+        // O(n^2) Quadratic nested iterations
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data.length; j++) {
+                if (data[i] == data[j] && i != j) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 2, 1, 4, 5, 3};
+        System.out.println("Duplicate pairs count: " + countPairs(numbers));
+    }
+}
+''',
+                "syntax_error": '''public class Main {
+    public static void main(String[] args) {
+        int x = 10
+        System.out.println(x);
+    }
+}
 '''
             },
             "javascript": {
