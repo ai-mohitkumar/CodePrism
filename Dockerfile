@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     gcc \
     default-jdk \
+    nodejs \
     sqlite3 \
     curl \
     git \
