@@ -135,7 +135,7 @@ class BaseLanguageAdapter(ABC):
             issues=q.issues
         )
 
-    def run_full_analysis(self, code: str, stdin: str = "", timeout_sec: float = 5.0, filename: Optional[str] = None) -> UniversalResult:
+    def run_full_analysis(self, code: str, stdin: str = "", timeout_sec: float = 12.0, filename: Optional[str] = None) -> UniversalResult:
         """Universal execution and analysis pipeline returning the standard format."""
         # 1. Compile
         compile_res = self.compile(code)
@@ -150,7 +150,7 @@ class BaseLanguageAdapter(ABC):
                 memory_mb=0.0
             )
         else:
-            exec_res = self.execute(code, stdin=stdin, timeout_sec=timeout_sec)
+            exec_res = self.execute(code, stdin=stdin, timeout_sec=max(timeout_sec, 12.0))
 
         # 3. AST
         ast_res = self.parse_ast(code)

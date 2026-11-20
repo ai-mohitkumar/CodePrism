@@ -13,6 +13,6 @@ def execute_code(req: ExecuteRequest):
     return adapter.run_full_analysis(
         code=req.code,
         stdin=req.stdin or "",
-        timeout_sec=req.timeout_sec or 5.0,
+        timeout_sec=req.timeout_sec or 12.0,
         filename=req.filename
     )

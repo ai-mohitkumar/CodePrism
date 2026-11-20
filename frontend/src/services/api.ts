@@ -7,7 +7,24 @@ import {
   ProjectTemplate, ShareProjectResponse
 } from '../types';
 
-const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'http://127.0.0.1:8080';
+const getApiBaseUrl = (): string => {
+  const envUrl = (import.meta as any).env?.VITE_API_BASE_URL;
+  if (envUrl) return envUrl;
+
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    // Local development
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'http://127.0.0.1:8080';
+    }
+    // Hosted on Vercel or any public domain -> connect directly to live Render backend
+    return 'https://codeprism-sch8.onrender.com';
+  }
+
+  return 'http://127.0.0.1:8080';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const client = axios.create({
   baseURL: API_BASE_URL,
@@ -16,6 +33,25 @@ const client = axios.create({
   },
   timeout: 45000,
 });
+
+// Automatic retry interceptor for Render cold starts (502/503/504 or network errors)
+client.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error.config;
+    if (!config || (config as any).__isRetry) {
+      return Promise.reject(error);
+    }
+    const isColdStart = !error.response || [502, 503, 504].includes(error.response?.status);
+    if (isColdStart) {
+      (config as any).__isRetry = true;
+      // Wait 3.5s for container to wake up, then retry once
+      await new Promise((r) => setTimeout(r, 3500));
+      return client(config);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const apiService = {
   async getLanguages(): Promise<{ languages: LanguageMeta[]; templates: Record<string, Record<string, string>> }> {
